@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>메모 앱</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .add-btn {
+      background: #111827;
+      color: white;
+    }
+
+    .add-btn:hover {
+      opacity: 0.9;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fafafa;
+      border: 1px solid #eee;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      word-break: break-word;
+    }
+
+    .delete-btn {
+      background: #ef4444;
+      color: white;
+      margin-left: 10px;
+      flex-shrink: 0;
+    }
+
+    .delete-btn:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 480px) {
+      .input-group {
+        flex-direction: column;
+      }
+
+      .add-btn {
+        width: 100%;
+      }
+
+      li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .delete-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>메모 앱</h1>
+
+      <div class="input-group">
+        <input type="text" id="memoInput" placeholder="메모를 입력하세요" />
+        <button class="add-btn" id="addBtn">추가</button>
+      </div>
+
+      <ul id="memoList"></ul>
+    </div>
+  </div>
+
+  <script>
+    const memoInput = document.getElementById("memoInput");
+    const addBtn = document.getElementById("addBtn");
+    const memoList = document.getElementById("memoList");
+
+    function addMemo() {
+      const text = memoInput.value.trim();
+
+      if (!text) return;
+
+      const li = document.createElement("li");
+
+      const span = document.createElement("span");
+      span.textContent = text;
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "삭제";
+      deleteBtn.className = "delete-btn";
+
+      deleteBtn.addEventListener("click", () => {
+        li.remove();
+      });
+
+      li.appendChild(span);
+      li.appendChild(deleteBtn);
+
+      memoList.appendChild(li);
+
+      memoInput.value = "";
+      memoInput.focus();
+    }
+
+    addBtn.addEventListener("click", addMemo);
+
+    memoInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        addMemo();
+      }
+    });
+  </script>
+</body>
+</html>

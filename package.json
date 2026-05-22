@@ -1,0 +1,12 @@
+{
+  "name": "simple-memo-app",
+  "version": "1.0.0",
+  "description": "Simple memo web service with Node.js and Express",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
